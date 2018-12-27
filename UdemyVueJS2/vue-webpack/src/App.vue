@@ -1,22 +1,51 @@
+<!--PARENT COMPONENT-->
+
+
 <template>
   <!--can only return on div, can have multiple divs in the one overall div-->
   <div>
     <app-header></app-header>
 
-    {{name  }} {{ lastname }}
+    <div class="container">
+      <compUserProfile>
+        :userName="name"
+        :userLastName="lastname"
+        :userAge="age"
+        :userParents="parents"
 
-    <compUserProfile
-:userName="name"
-                     :userLastName="lastname"
-                     :userAge="age"
-                     :userParents="parents"
+        <!--using below to capture the $emit event inert Profile.vue file under methods-->
+        :@updateName="name = $event"
+        :updateLastName="updateLastName"
 
-                     <!--using below to capture the $emit event inert Profile.vue file under methods-->
-                     @updateName="name = $event"
-    :updateLastName="updateLastName"
-                     />
+      </compUserProfile>
+
+      <compFriends></compFriends>
+
+      <compAbilities>
+        <ul slot="main-ab">
+
+          <!--whatever we put here could be rendered inside of the actual component! Abilities.vue -->
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JS</li>
 
 
+
+          <li v-for="(ab, index) in abilities" : key="index">
+            {{ ab }}
+
+          </li>
+        </ul>
+        <div slot="notes">
+          <p>The user also knows PHP</p>
+        </div>
+        <div>
+          <a href="#">See more about user</a>
+        </div>
+
+        <div :slot="slotName">Other content</div>
+      </compAbilities>
+    </div>
 
     <!--<div class="container">
       <div>  </div>
@@ -32,6 +61,8 @@
 
   import compFooter from './Components/Header_footer/Footer.vue';
   import compUserProfile from './Components/User/Profile.vue';
+  import compFriends from './Components/User/Friends.vue';
+  import compAbilities from './Components/User/Abilities.vue';
 
   export default {
 
@@ -45,7 +76,9 @@
         parents: {
           mother: "Martha",
           father: "Mario",
-        }
+        },
+        abilities: ['HTML', 'CSS', 'JS'],
+        slotName:'',
       }
     },
     methods: {
@@ -59,8 +92,16 @@
     components: {
       //'app-footer':Footer
       compFooter,
-      compUserProfile
-    }
+      compUserProfile,
+      compFriends,
+      compAbilities,
+
+    },
+    created() {
+      setTimeout(() => {
+        this.slotName = 'other'
+      }, 3000)
+    },
 
 
   }

@@ -16381,6 +16381,8 @@
     <Content Include="vue-webpack\src\components\Header_footer\Footer.vue" />
     <Content Include="vue-webpack\src\components\Header_footer\Header.vue" />
     <Content Include="vue-webpack\src\components\User\Profile.vue" />
+    <Content Include="vue-webpack\src\components\User\Friends.vue" />
+    <Content Include="vue-webpack\src\components\User\Abilities.vue" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

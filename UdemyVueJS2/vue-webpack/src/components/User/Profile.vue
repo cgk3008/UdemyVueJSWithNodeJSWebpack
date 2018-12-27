@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div >
     <div class="user-profile">
       <h3> User information: </h3>
       <ul>
@@ -15,13 +15,27 @@
       </ul>
     </div>
     <button on-click="updateName"> update name</button>
-    <button on-click="updateLastName()"> update last name</button>
-    hey
+    <button on-click="updateLastName('Smith')"> update last name</button>
+    <div>
+
+      when adding an input, use v-model
+      <input type="text" v-model="friendInput"/>
+      <button on-click=""addFriend> add friend</button>
+    </div>
   </div>
 </template>
 
 <script>
+
+  //us line below to connect bus from main.js to profile.vue (this file)
+  import { bus } from '../..//main.js';
+
   export default {
+    data() {
+      return {
+        friendInput:''
+      }
+    },
 
     //can use object or an array for the props
     //props: ['name', 'lastname'],
@@ -40,6 +54,9 @@
         //this.userName = "Francis Dumbledore"
         //"$emit triggers an action to do something
         this.$emit('updateName', 'Francis Steve')
+      },
+      addFriend() {
+        bus.$emit('addFriend', this.addFriend)
       }
     },
 
